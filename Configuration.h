@@ -86,7 +86,7 @@
  */
 
 // Show the Marlin bootscreen on startup. ** ENABLE FOR PRODUCTION **
-//#define SHOW_BOOTSCREEN
+#define SHOW_BOOTSCREEN
 
 // Show the bitmap in Marlin/_Bootscreen.h on startup.
 //#define SHOW_CUSTOM_BOOTSCREEN
@@ -482,10 +482,11 @@
                                   // is more than PID_FUNCTIONAL_RANGE then the PID will be shut off and the heater will be set to min/max.
 
   // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
-// TODO: verify
-    #define  DEFAULT_Kp 		22.2
-    #define  DEFAULT_Ki 		1.08
-    #define  DEFAULT_Kd 		114
+  // Tronxy P802D Standard Extruder at 210 Degree Celsius and 100% Fan
+  //(measured after M106 S255 with M303 E0 S210 C8)
+  #define DEFAULT_Kp 18.65  //22.2
+  #define DEFAULT_Ki 0.80 //1.08
+  #define DEFAULT_Kd 109.25 //114.0
 
   // Ultimaker
   //#define DEFAULT_Kp 22.2
@@ -537,10 +538,11 @@
   //#define MIN_BED_POWER 0
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
-//TODO: verify
-    #define  DEFAULT_bedKp 	10.00
-    #define  DEFAULT_bedKi 	0.023
-    #define  DEFAULT_bedKd 	305.4
+  // My Tronxy P802D
+  // original Bed + 0.3mm Heat conducting into 4mm borosilicate (PID-Autotune: M303 E-1 S60 C5):
+  #define DEFAULT_bedKp 478.18 ///295.00
+  #define DEFAULT_bedKi 65.58 //35.65
+  #define DEFAULT_bedKd 871.60 //610.21
 
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
@@ -574,7 +576,7 @@
  * Note: For Bowden Extruders make this large enough to allow load/unload.
  */
 #define PREVENT_LENGTHY_EXTRUDE
-#define EXTRUDE_MAXLENGTH 1000
+#define EXTRUDE_MAXLENGTH 200
 
 //===========================================================================
 //======================== Thermal Runaway Protection =======================
@@ -699,7 +701,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic o
 
 // Enable this feature if all enabled endstop pins are interrupt-capable.
 // This will remove the need to poll the interrupt pins, saving many CPU cycles.
-//#define ENDSTOP_INTERRUPTS_FEATURE
+#define ENDSTOP_INTERRUPTS_FEATURE
 
 /**
  * Endstop Noise Threshold
@@ -801,6 +803,9 @@ const bool Z_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic o
   #endif
 #endif
 
+#define DEFAULT_XJERK                 20.0
+#define DEFAULT_YJERK                 20.0
+#define DEFAULT_ZJERK                  0.4
 #define DEFAULT_EJERK    5.0  // May be used by Linear Advance
 
 /**
@@ -822,7 +827,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic o
  *
  * See https://github.com/synthetos/TinyG/wiki/Jerk-Controlled-Motion-Explained
  */
-//#define S_CURVE_ACCELERATION
+#define S_CURVE_ACCELERATION //SPACE SAVE: disable
 
 //===========================================================================
 //============================= Z Probe Options =============================
@@ -1112,9 +1117,6 @@ const bool Z_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic o
 #define Y_MIN_POS 		-5
 #define Z_MAX_POS 		230
 #define Z_MIN_POS		0
-//#define X_MAX_LENGTH 	(X_MAX_POS - X_MIN_POS)
-//#define Y_MAX_LENGTH 	(Y_MAX_POS - Y_MIN_POS)
-//#define Z_MAX_LENGTH 	(Z_MAX_POS - Z_MIN_POS)
 
 /**
  * Software Endstops
@@ -1368,7 +1370,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic o
 // - Move the Z probe (or nozzle) to a defined XY point before Z Homing when homing all axes (G28).
 // - Prevent Z homing when the Z probe is outside bed area.
 //
-//#define Z_SAFE_HOMING
+#define Z_SAFE_HOMING //SPACE SAVE: disable
 
 #if ENABLED(Z_SAFE_HOMING)
   #define Z_SAFE_HOMING_X_POINT ((X_BED_SIZE) / 2)    // X point for Z homing when homing all axes (G28).
@@ -1755,7 +1757,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic o
 // If you have a speaker that can produce tones, enable it here.
 // By default Marlin assumes you have a buzzer with a fixed frequency.
 //
-#define SPEAKER
+// #define SPEAKER
 
 //
 // The duration and frequency for the UI feedback sound.
@@ -1764,8 +1766,8 @@ const bool Z_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic o
 // Note: Test audio output with the G-Code:
 //  M300 S<frequency Hz> P<duration ms>
 //
-#define LCD_FEEDBACK_FREQUENCY_DURATION_MS 2
-#define LCD_FEEDBACK_FREQUENCY_HZ 1000
+// #define LCD_FEEDBACK_FREQUENCY_DURATION_MS 2
+// #define LCD_FEEDBACK_FREQUENCY_HZ 1000
 
 //=============================================================================
 //======================== LCD / Controller Selection =========================
