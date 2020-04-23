@@ -482,11 +482,11 @@
                                   // is more than PID_FUNCTIONAL_RANGE then the PID will be shut off and the heater will be set to min/max.
 
   // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
-  // Tronxy P802M measured with M303 E0 S200 C8
+  // Tronxy P802M at 100% fan speed
   //(measured after M106 S255 with M303 E0 S210 C8)
-  #define DEFAULT_Kp 13.60
-  #define DEFAULT_Ki 0.53
-  #define DEFAULT_Kd 88.05
+  #define DEFAULT_Kp 14.11
+  #define DEFAULT_Ki 0.56
+  #define DEFAULT_Kd 88.98
 
   // Ultimaker
   //#define DEFAULT_Kp 22.2
@@ -524,7 +524,7 @@
  */
 #define PIDTEMPBED
 
-// #define BED_LIMIT_SWITCHING
+//#define BED_LIMIT_SWITCHING
 
 /**
  * Max Bed Power
@@ -539,9 +539,9 @@
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
   // P802M with glass
-  #define DEFAULT_bedKp 142.70
-  #define DEFAULT_bedKi 26.80
-  #define DEFAULT_bedKd 506.59
+  #define DEFAULT_bedKp 128.95
+  #define DEFAULT_bedKi 23.85
+  #define DEFAULT_bedKd 464.83
 
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
